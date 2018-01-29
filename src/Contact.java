@@ -9,6 +9,10 @@ public class Contact {
         this.adresse = new Adresse();
         this.occupation = new Occupation();
         this.telephone = new Telephone[10];
+        for(int i = 0; i < telephone.length; i++)
+        {
+            telephone[i] = new Telephone();
+        }
     }
 
     public String getPrenom(){return this.prenom;}
@@ -17,8 +21,12 @@ public class Contact {
     public Occupation getOccup(){return this.occupation;}
     public Telephone getTelephone(int _i){return this.telephone[_i];}
 
-    public void setPrenom(String _prenom){this.prenom = _prenom;}
-    public void setNom(String _nom){this.nom = _nom;}
+    public void setPrenom(String _prenom){
+        if(!_prenom.equals("*"))
+        this.prenom = _prenom;}
+    public void setNom(String _nom){
+        if(!_nom.equals("*"))
+        this.nom = _nom;}
 
 
 }
