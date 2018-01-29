@@ -8,7 +8,7 @@ public class Occupation {
     public Entreprise getEntreprise(){return  this.entreprise;}
 
     public void setPoste(String _poste){
-        if(_poste != "")
+        if(!_poste.equals("*"))
         this.poste = _poste;}
 
 }

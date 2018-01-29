@@ -9,9 +9,9 @@ public class Telephone {
     public String getNumero(){return this.numero;}
 
     public void setInfo(String _info){
-        if(_info != "")
+        if(!_info.equals("*"))
         this.info = _info;}
     public void setNumero(String _numero){
-        if(_numero != "")
+        if(!_numero.equals("*"))
         this.numero = _numero;}
 }
