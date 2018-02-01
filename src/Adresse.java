@@ -32,5 +32,6 @@ public class Adresse {
     public String getVille(){return this.ville;}
     public String getProvince(){return this.province;}
     public String getPays(){return this.pays;}
+    public String getNumAppart(){return this.numAppart;}
 
 }
