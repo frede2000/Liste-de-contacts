@@ -1,13 +1,14 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
         boolean arret = false;
         int position = 0, positionTel = 0, numContact = 0, choice = 0, nombreContact = 0;
-
+        String nomComplet;
         Scanner sc = new Scanner(System.in);
-        Contact[] tabContact = new Contact[20];
+
+        Map<String, Contact> contacts = new HashMap<String, Contact>();
 
 
         System.out.print("Bienvenue!\n");
@@ -26,163 +27,118 @@ public class Main {
 
                 // Ajoutter
                 case 1:
-                    tabContact[position] = new Contact();
+                    Contact contact = new Contact();
                     System.out.print("Ce contact sera entré à la position #" + (position + 1) + "." +
                             "\nVeuillez entrer les informations suivantes :\n");
                     System.out.print("Prénom : ");
-                    tabContact[position].setPrenom(sc.next());
+                    contact.setPrenom(sc.next());
                     System.out.print("\nNom : ");
-                    tabContact[position].setNom(sc.next());
+                    contact.setNom(sc.next());
+                    if(contacts.containsKey(contact.getPrenom()+ " " + contact.getNom()))
+                        contacts.put(contact.getPrenom() + " " + contact.getNom() + "(1)", contact);
+                    else
+                        contacts.put(contact.getPrenom() + " " + contact.getNom(), contact);
 
                     System.out.print("\nAdresse : \n\tNuméro de porte : ");
-                    tabContact[position].getAdresse().setPorte(sc.next());
+                    contact.getAdresse().setPorte(sc.next());
                     System.out.print("\n\tRue : ");
-                    tabContact[position].getAdresse().setRue(sc.next());
+                    contact.getAdresse().setRue(sc.next());
                     System.out.print("\n\tAppartement : ");
-                    tabContact[position].getAdresse().setNumAppart(sc.next());
+                    contact.getAdresse().setNumAppart(sc.next());
                     System.out.print("\n\tVille : ");
-                    tabContact[position].getAdresse().setVille(sc.next());
+                    contact.getAdresse().setVille(sc.next());
                     System.out.print("\n\tProvince : ");
-                    tabContact[position].getAdresse().setProvince(sc.next());
+                    contact.getAdresse().setProvince(sc.next());
                     System.out.print("\n\tPays : ");
-                    tabContact[position].getAdresse().setPays(sc.next());
+                    contact.getAdresse().setPays(sc.next());
 
                     System.out.print("\nOccupation : \n\tPoste : ");
-                    tabContact[position].getOccup().setPoste(sc.next());
+                    contact.getOccup().setPoste(sc.next());
                     System.out.print("\n\tEntreprise : \n\t\tNom: ");
-                    tabContact[position].getOccup().getEntreprise().setNom(sc.next());
+                    contact.getOccup().getEntreprise().setNom(sc.next());
                     System.out.print("\n\t\tAdresse : \n\t\t\tNuméro de porte : ");
-                    tabContact[position].getOccup().getEntreprise().setAdEnt(sc.next());
+                    contact.getOccup().getEntreprise().setAdEnt(sc.next());
                     System.out.print("\n\t\t\tRue : ");
-                    tabContact[position].getOccup().getEntreprise().setRue(sc.next());
+                    contact.getOccup().getEntreprise().setRue(sc.next());
                     System.out.print("\n\t\t\tAppartement : ");
-                    tabContact[position].getOccup().getEntreprise().setNumApps(sc.next());
+                    contact.getOccup().getEntreprise().setNumApps(sc.next());
                     System.out.print("\n\t\t\tVille : ");
-                    tabContact[position].getOccup().getEntreprise().setVille(sc.next());
+                    contact.getOccup().getEntreprise().setVille(sc.next());
                     System.out.print("\n\t\t\tProvince : ");
-                    tabContact[position].getOccup().getEntreprise().setProvince(sc.next());
+                    contact.getOccup().getEntreprise().setProvince(sc.next());
                     System.out.print("\n\t\t\tPays : ");
-                    tabContact[position].getOccup().getEntreprise().setPays(sc.next());
+                    contact.getOccup().getEntreprise().setPays(sc.next());
 
                     System.out.print("\nEntrer un numéro de téléphone ?\t( 1.oui / 2.non )");
                     positionTel = 0;
                     while(sc.nextInt() == 1)
                     {
-                        System.out.print("\nÀ quoi correpond ce numérp (cellulaire, maison, travail, ...) ?");
-                        tabContact[position].getTelephone(positionTel).setInfo(sc.next());
-                        System.out.print("\nQuel est le numéro ? ");
-                        tabContact[position].getTelephone(positionTel).setNumero(sc.next());
+                        contact.setTelephones();
                         System.out.print("\nEntrer un autre numéro de téléphone ?\t( 1.oui / 2.non )");
-                        positionTel++;
                     }
 
                     break;
                 case 2:
 
                     // Modifier
-                    System.out.print("\nQuel est le numéro du contact ?");
-                    numContact = sc.nextInt()-1;
+                    System.out.print("\nQuel est le nom ([prénom] [nom]) du contact ?");
+                    nomComplet = sc.next();
                     System.out.print("\nVeuillez entrer les informations suivantes (mettre un * si correct) :" +
-                            "\nPrénom (" + tabContact[numContact].getPrenom() + ") : ");
-                    tabContact[numContact].setPrenom(sc.next());
-                    System.out.print("\nNom (" + tabContact[numContact].getNom() + ") : ");
-                    tabContact[numContact].setNom(sc.next());
-                    System.out.print("\nAdresse : \n\tNuméro de porte : " + tabContact[numContact].getAdresse().getPorte() + ") : ");
-                    tabContact[numContact].getAdresse().setPorte(sc.next());
-                    System.out.print("\n\tRue (" + tabContact[numContact].getAdresse().getRue() + ") : ");
-                    tabContact[numContact].getAdresse().setRue(sc.next());
-                    System.out.print("\n\tAppartement (" + tabContact[numContact].getAdresse().getNumAppart() + ") : ");
-                    tabContact[numContact].getAdresse().setNumAppart(sc.next());
-                    System.out.print("\n\tVille (" + tabContact[numContact].getAdresse().getVille() + ") : ");
-                    tabContact[numContact].getAdresse().setVille(sc.next());
-                    System.out.print("\n\tProvince (" + tabContact[numContact].getAdresse().getProvince() + ") : ");
-                    tabContact[numContact].getAdresse().setProvince(sc.next());
-                    System.out.print("\n\tPays (" + tabContact[numContact].getAdresse().getPays() + ") : ");
-                    tabContact[numContact].getAdresse().setPays(sc.next());
+                            "\nPrénom (" + contacts.get(nomComplet).getPrenom() + ") : ");
+                    contacts.get(nomComplet).setPrenom(sc.next());
+                    System.out.print("\nNom (" + contacts.get(nomComplet).getNom() + ") : ");
+                    contacts.get(nomComplet).setNom(sc.next());
+                    System.out.print("\nAdresse : \n\tNuméro de porte : " + contacts.get(nomComplet).getAdresse().getPorte() + ") : ");
+                    contacts.get(nomComplet).getAdresse().setPorte(sc.next());
+                    System.out.print("\n\tRue (" + contacts.get(nomComplet).getAdresse().getRue() + ") : ");
+                    contacts.get(nomComplet).getAdresse().setRue(sc.next());
+                    System.out.print("\n\tAppartement (" + contacts.get(nomComplet).getAdresse().getNumAppart() + ") : ");
+                    contacts.get(nomComplet).getAdresse().setNumAppart(sc.next());
+                    System.out.print("\n\tVille (" + contacts.get(nomComplet).getAdresse().getVille() + ") : ");
+                    contacts.get(nomComplet).getAdresse().setVille(sc.next());
+                    System.out.print("\n\tProvince (" + contacts.get(nomComplet).getAdresse().getProvince() + ") : ");
+                    contacts.get(nomComplet).getAdresse().setProvince(sc.next());
+                    System.out.print("\n\tPays (" + contacts.get(nomComplet).getAdresse().getPays() + ") : ");
+                    contacts.get(nomComplet).getAdresse().setPays(sc.next());
 
-                    System.out.print("\nOccupation : \n\tPoste (" + tabContact[numContact].getOccup().getPoste() + ") : ");
-                    tabContact[position].getOccup().setPoste(sc.next());
-                    System.out.print("\n\tEntreprise : \n\t\tNom (" + tabContact[numContact].getOccup().getEntreprise().getNom() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setNom(sc.next());
-                    System.out.print("\n\t\tAdresse : \n\t\t\tNuméro de porte (" + tabContact[numContact].getOccup().getEntreprise().getAdEnt() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setAdEnt(sc.next());
-                    System.out.print("\n\t\t\tRue (" + tabContact[numContact].getOccup().getEntreprise().getRue() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setRue(sc.next());
-                    System.out.print("\n\t\t\tAppartement (" + tabContact[numContact].getOccup().getEntreprise().getNumApps() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setNumApps(sc.next());
-                    System.out.print("\n\t\t\tVille (" + tabContact[numContact].getOccup().getEntreprise().getVille() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setVille(sc.next());
-                    System.out.print("\n\t\t\tProvince (" + tabContact[numContact].getOccup().getEntreprise().getProvince() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setProvince(sc.next());
-                    System.out.print("\n\t\t\tPays (" + tabContact[numContact].getOccup().getEntreprise().getPays() + ") : ");
-                    tabContact[position].getOccup().getEntreprise().setPays(sc.next());
-                    positionTel = 0;
+                    System.out.print("\nOccupation : \n\tPoste (" + contacts.get(nomComplet).getOccup().getPoste() + ") : ");
+                    contacts.get(nomComplet).getOccup().setPoste(sc.next());
+                    System.out.print("\n\tEntreprise : \n\t\tNom (" + contacts.get(nomComplet).getOccup().getEntreprise().getNom() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setNom(sc.next());
+                    System.out.print("\n\t\tAdresse : \n\t\t\tNuméro de porte (" + contacts.get(nomComplet).getOccup().getEntreprise().getAdEnt() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setAdEnt(sc.next());
+                    System.out.print("\n\t\t\tRue (" + contacts.get(nomComplet).getOccup().getEntreprise().getRue() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setRue(sc.next());
+                    System.out.print("\n\t\t\tAppartement (" + contacts.get(nomComplet).getOccup().getEntreprise().getNumApps() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setNumApps(sc.next());
+                    System.out.print("\n\t\t\tVille (" + contacts.get(nomComplet).getOccup().getEntreprise().getVille() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setVille(sc.next());
+                    System.out.print("\n\t\t\tProvince (" + contacts.get(nomComplet).getOccup().getEntreprise().getProvince() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setProvince(sc.next());
+                    System.out.print("\n\t\t\tPays (" + contacts.get(nomComplet).getOccup().getEntreprise().getPays() + ") : ");
+                    contacts.get(nomComplet).getOccup().getEntreprise().setPays(sc.next());
                     System.out.print("\nTéléphones : ");
-                    while(!tabContact[numContact].getTelephone(positionTel).getNumero().equals("*"))
-                    {
-                        System.out.print(tabContact[numContact].getTelephone(positionTel).getInfo() + " " + tabContact[numContact].getTelephone(positionTel).getNumero() + " : ");
-                        tabContact[numContact].getTelephone(positionTel).setNumero(sc.next());
-                        positionTel++;
-                    }
-
-                    System.out.print("\nEntrer un numéro de téléphone ?\t( 1.oui / 2.non )");
-                    while(sc.nextInt() == 1)
-                    {
-                        System.out.print("\nÀ quoi correpond ce numérp (cellulaire, maison, travail, ...) ?");
-                        tabContact[position].getTelephone(positionTel).setInfo(sc.next());
-                        System.out.print("\nQuel est le numéro ? ");
-                        tabContact[position].getTelephone(positionTel).setNumero(sc.next());
-                        System.out.print("\nEntrer un autre numéro de téléphone ?\t( 1.oui / 2.non )");
-                        positionTel++;
-                    }
-
+                    contacts.get(nomComplet).modifiTelephone();
                     break;
                 case 3:
 
                     // nombre e contact
                     // Afficher contact(s)
-                    nombreContact = 0;
-                    for(int i = 0; i < tabContact.length; i++)
-                    {
-                        if(!tabContact[i].getPrenom().isEmpty())
-                            nombreContact++;
-                    }
-                    System.out.print("\nVous avez " + tabContact.length + " contact (s)");
-                    for(int i = 0; i < nombreContact; i++)
-                    {
-                        System.out.print("Contact #" + (i+1) + " :\n" +
-                                "--------------\n" +
-                                "Prénom : " + tabContact[i].getPrenom() + "\n" +
-                                "Nom : " + tabContact[i].getNom() + "\n" +
-                                "Adresse : \n" +
-                                "\tNuméro de porte : " + tabContact[i].getAdresse().getPorte() + "\n" +
-                                "\tRue : " + tabContact[i].getAdresse().getRue() + "\n" +
-                                "\tAppartement : " + tabContact[i].getAdresse().getNumAppart() + "\n" +
-                                "\tVille : " + tabContact[i].getAdresse().getVille() + "\n" +
-                                "\tProvince : " + tabContact[i].getAdresse().getProvince() + " \n" +
-                                "\tPays : " + tabContact[i].getAdresse().getPays() + "\n" +
-                                "Occupation : \n" +
-                                "\tPoste : " + tabContact[i].getOccup().getPoste() + "\n" +
-                                "\tEntreprise : \n" +
-                                "\t\tNom : " + tabContact[i].getOccup().getEntreprise().getNom() + "\n" +
-                                "\t\tAdresse :\n" +
-                                "\t\t\tNuméro de porte : " + tabContact[i].getOccup().getEntreprise().getAdEnt() + "\n" +
-                                "\t\t\tRue : " + tabContact[i].getOccup().getEntreprise().getRue() + "\n" +
-                                "\t\t\tAppartement : " + tabContact[i].getOccup().getEntreprise().getNumApps() + "\n" +
-                                "\t\t\tVille : " + tabContact[i].getOccup().getEntreprise().getVille() + "\n" +
-                                "\t\t\tProvince : " + tabContact[i].getOccup().getEntreprise().getProvince() + "\n" +
-                                "\t\t\tPays : " + tabContact[i].getOccup().getEntreprise().getPays() + "\n" +
-                                "Téléphone : \n");
-                        for(int f = 0; f < 10; f++)
-                        {
-                            if(!tabContact[i].getTelephone(f).getNumero().equals("*"))
-                            {
-                                System.out.print(tabContact[i].getTelephone(f).getInfo() + " : " + tabContact[i].getTelephone(f).getNumero() + "\n");
-                            }
-                        }
-                    }
+                    System.out.print("\nVous avez " + contacts.size() + " contact(s)\n");
 
-                    break;
+                    contacts.get("frederick bouchard");
+
+                    //         for(Contact contact1 : contacts.entrySet())
+                    //          {
+
+                    //      }
+                    //    for(int i = 0; i < contacts.size(); i++)
+                    //     {
+                    //         System.out.print("Contacte #" + (i+1) );
+                    //  contacts.get().getInfo();
+                    //  contacts.get(i).getTelephone();
+                    //  }
+                    //  break;
                 case 4:
 
                     //Quitter
