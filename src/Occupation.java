@@ -1,4 +1,6 @@
-public class Occupation {
+import java.io.Serializable;
+
+public class Occupation implements Serializable {
     private String poste;
     private Entreprise entreprise = new Entreprise();
 

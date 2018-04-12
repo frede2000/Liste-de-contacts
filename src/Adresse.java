@@ -1,4 +1,6 @@
-public class Adresse {
+import java.io.Serializable;
+
+public class Adresse implements Serializable {
     private String Rue, ville, province, pays, numAppart, porte;
 
     public Adresse() {

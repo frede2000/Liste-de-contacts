@@ -1,4 +1,6 @@
-public class Telephone {
+import java.io.Serializable;
+
+public class Telephone implements Serializable {
     private String info, numero;
 
     public Telephone(){
