@@ -153,14 +153,28 @@ public class Main {
 
                 case 4:
                     // Supprimer un contact
-                    for(Map.Entry<String, Contact> contactEntry : contacts.entrySet())
-                    {
-                        System.out.print(contactEntry.getValue().getNom() + " " + contactEntry.getValue().getPrenom() + "\n");
-                    }
-                    System.out.print("Supprimer quel contact ? (nom)\n\n");
-                    nomComplet = sc.next();
-                    contacts.remove(nomComplet);
-                    System.out.print("Le contacte a été supprimer\n");
+                    System.out.print("Supprimer tous les contactes ou choisir un contacte à supprimer ? (1.tous/2.un seul)\n");
+                    switch(saisieTest.intTest())
+                {
+                    case 1:
+                        System.out.print("Etes-vous sur de vouloir supprimer tous vos contactes ? (1.oui/2.non)\n");
+                        if(saisieTest.intTest() == 1)
+                        {
+                            contacts.clear();
+                            System.out.print("Tous les contactes supprimé\n");
+                        }
+                        break;
+                    case 2:
+                        for(Map.Entry<String, Contact> contactEntry : contacts.entrySet())
+                        {
+                            System.out.print(contactEntry.getValue().getNom() + " " + contactEntry.getValue().getPrenom() + "\n");
+                        }
+                        System.out.print("Supprimer quel contact ? (nom)\n\n");
+                        nomComplet = sc.next();
+                        contacts.remove(nomComplet);
+                        System.out.print("Le contacte a été supprimer\n");
+                        break;
+                }
                     break;
 
                 case 5:
