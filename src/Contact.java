@@ -60,7 +60,7 @@ public class Contact implements Serializable {
     }
 
     public void setPrenom(String _prenom){
-        if(!_prenom.equals("*"))
+        if(!_prenom.isEmpty())
         this.prenom = _prenom;}
     public void setNom(String _nom){
         if(!_nom.equals("*"))

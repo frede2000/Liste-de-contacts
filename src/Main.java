@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) {
 
         boolean arret = false;
-        int choice = 0;
         String nomComplet;
         Scanner sc = new Scanner(System.in);
         File file = new File("ListeDeContacts/src/Save.dat");
@@ -13,6 +12,7 @@ public class Main {
         Queue<String> listRappel = new LinkedList<String>();
 
         SaisieTest saisieTest = new SaisieTest();
+        SaisiePays saisiePays = new SaisiePays();
 
         do{
             System.out.print("1. Ajouter un contact\n" +
@@ -46,7 +46,7 @@ public class Main {
                     System.out.print("\n\tProvince : ");
                     contact.getAdresse().setProvince(sc.next());
                     System.out.print("\n\tPays : ");
-                    contact.getAdresse().setPays(sc.next());
+                    contact.getAdresse().setPays(saisiePays.testPays());
 
                     System.out.print("\nOccupation : \n\tPoste : ");
                     contact.getOccup().setPoste(sc.next());
@@ -63,7 +63,7 @@ public class Main {
                     System.out.print("\n\t\t\tProvince : ");
                     contact.getOccup().getEntreprise().setProvince(sc.next());
                     System.out.print("\n\t\t\tPays : ");
-                    contact.getOccup().getEntreprise().setPays(sc.next());
+                    contact.getOccup().getEntreprise().setPays(saisiePays.testPays());
 
                     System.out.print("\nEntrer un numéro de téléphone ?\t( 1.oui / 2.non )");
                     while(saisieTest.intTest() == 1)
@@ -94,7 +94,7 @@ public class Main {
                     System.out.print("\n\tProvince (" + contacts.get(nomComplet).getAdresse().getProvince() + ") : ");
                     contacts.get(nomComplet).getAdresse().setProvince(sc.next());
                     System.out.print("\n\tPays (" + contacts.get(nomComplet).getAdresse().getPays() + ") : ");
-                    contacts.get(nomComplet).getAdresse().setPays(sc.next());
+                    contacts.get(nomComplet).getAdresse().setPays(saisiePays.testPays());
 
                     System.out.print("\nOccupation : \n\tPoste (" + contacts.get(nomComplet).getOccup().getPoste() + ") : ");
                     contacts.get(nomComplet).getOccup().setPoste(sc.next());
@@ -111,7 +111,7 @@ public class Main {
                     System.out.print("\n\t\t\tProvince (" + contacts.get(nomComplet).getOccup().getEntreprise().getProvince() + ") : ");
                     contacts.get(nomComplet).getOccup().getEntreprise().setProvince(sc.next());
                     System.out.print("\n\t\t\tPays (" + contacts.get(nomComplet).getOccup().getEntreprise().getPays() + ") : ");
-                    contacts.get(nomComplet).getOccup().getEntreprise().setPays(sc.next());
+                    contacts.get(nomComplet).getOccup().getEntreprise().setPays(saisiePays.testPays());
                     System.out.print("\nTéléphones : \n");
 
                     for(int i = 0; i < contacts.get(nomComplet).getSizeTel(); i++)
